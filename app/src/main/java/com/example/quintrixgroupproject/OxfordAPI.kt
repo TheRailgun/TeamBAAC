@@ -24,7 +24,6 @@ interface OxfordAPI {
     @GET("entries/en-us/{word}?strictMatch=false")
     fun getEntries(@HeaderMap headers : Map<String, String>, @Path("word") userWord : String) : Call<EntriesResponse>
 
-    //replace string with LemmasResponse once the class is created
     @GET("lemmas/en/{word}")
     fun getLemmas(@HeaderMap headers: Map<String, String>, @Path("word") userWord: String) : Call<LemmasResponse>
 

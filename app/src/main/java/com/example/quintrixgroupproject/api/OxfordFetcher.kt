@@ -88,7 +88,7 @@ class OxfordFetcher {
     }
 
     //https://proandroiddev.com/headers-in-retrofit-a8d71ede2f3e
-    //resource I used. Still need to look at path variables tho
+    //resource I used
     private fun getHeaderMap() : Map<String, String> {
         val headerMap = mutableMapOf<String, String>()
         headerMap["Accept"] = "application/json"
