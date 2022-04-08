@@ -1,3 +1,6 @@
 <resources>
-    <string name="app_name">QuintrixGroupProject</string>
+    <string name="app_name">Quicktionary</string>
+    <string name="search_button">Search</string>
+    <string name="word_prompt">Enter word here</string>
+    <string name="thesaurus_button">Thesaurus</string>
 </resources>
