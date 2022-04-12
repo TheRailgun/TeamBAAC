@@ -1,19 +1,10 @@
-package com.example.quintrixgroupproject.api
+package com.example.quintrixgroupproject.oxfordapi
 
 import android.content.ContentValues.TAG
-import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.quintrixgroupproject.OxfordAPI
-import com.example.quintrixgroupproject.api_key
-import com.example.quintrixgroupproject.app_id
+import com.example.quintrixgroupproject.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -92,8 +83,8 @@ class OxfordFetcher {
     private fun getHeaderMap() : Map<String, String> {
         val headerMap = mutableMapOf<String, String>()
         headerMap["Accept"] = "application/json"
-        headerMap["app_id"] = app_id
-        headerMap["app_key"] = api_key
+        headerMap["app_id"] = o_app_id
+        headerMap["app_key"] = o_api_key
         return headerMap
     }
 }

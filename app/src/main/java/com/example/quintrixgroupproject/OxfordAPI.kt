@@ -1,19 +1,17 @@
 package com.example.quintrixgroupproject
 
-import com.example.quintrixgroupproject.api.EntriesResponse
-import com.example.quintrixgroupproject.api.LemmasResponse
+import com.example.quintrixgroupproject.oxfordapi.EntriesResponse
+import com.example.quintrixgroupproject.oxfordapi.LemmasResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.HeaderMap
 import retrofit2.http.Path
-import java.io.FileInputStream
-import java.util.*
 
 //For some reason I can't move this file into the api package without breaking the BuildConfig
 //Look into this later
 
-const val api_key : String = BuildConfig.API_KEY
-const val app_id : String = BuildConfig.APP_ID
+const val o_api_key : String = BuildConfig.O_API_KEY
+const val o_app_id : String = BuildConfig.O_APP_ID
 
 interface OxfordAPI {
 
