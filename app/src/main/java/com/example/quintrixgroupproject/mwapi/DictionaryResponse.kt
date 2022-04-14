@@ -17,7 +17,7 @@ data class DictionaryResponse(
     val hwi : DHwi,
     val vrs : List<DVR>,
     val fl : String,
-    //val def : List<DDef>,
+    val def : List<DDef>,
     val data : String,
     val shortdef : List<String>
 )
@@ -30,8 +30,10 @@ data class DictionaryResponse(
 //this seems like a problem with the JSON and not in my code but I could be wrong
 //get the same problem when trying a few diff words with the api
 data class DDef(
-    val sseq : List<List<List<Senses>>>
+    val sseq : List<List<List<Any>>>
 )
+
+
 
 data class Senses(
     val sense : SenseElem
@@ -55,7 +57,8 @@ open class Senses2(){
 
 data class SenseElem (
     val sn : String,
-    val dt : List<List<String>>
+    val dt : List<List<String>>,
+    //val sdsense : Senses
 )
 
 data class DHwi(
@@ -65,10 +68,10 @@ data class DHwi(
 
 data class DPR(
     val mw : String,
-    val sound : Sound
+    val sound : SoundD
 )
 
-data class Sound(
+data class SoundD(
     val audio : String,
     val ref : String,
     val stat : String
