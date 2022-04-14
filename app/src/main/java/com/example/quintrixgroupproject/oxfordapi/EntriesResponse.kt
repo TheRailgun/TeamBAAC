@@ -1,4 +1,4 @@
-package com.example.quintrixgroupproject.api
+package com.example.quintrixgroupproject.oxfordapi
 
 
 data class EntriesResponse(

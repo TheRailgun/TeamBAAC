@@ -17,8 +17,11 @@ android {
 
         Properties properties = new Properties()
         properties.load(project.rootProject.file('local.properties').newDataInputStream())
-        buildConfigField( "String", "API_KEY", "${properties.getProperty('API_KEY')}")
-        buildConfigField( "String", "APP_ID", "${properties.getProperty('APP_ID')}")
+        buildConfigField( "String", "O_API_KEY", "${properties.getProperty('O_API_KEY')}")
+        buildConfigField( "String", "O_APP_ID", "${properties.getProperty('O_APP_ID')}")
+        buildConfigField( "String", "MW_D_API_KEY", "${properties.get('MW_D_API_KEY')}")
+        buildConfigField( "String", "MW_T_API_KEY", "${properties.get('MW_T_API_KEY')}")
+
     }
 
     buildTypes {

@@ -1,4 +1,4 @@
-package com.example.quintrixgroupproject.api
+package com.example.quintrixgroupproject.oxfordapi
 
 //reusing some data classes from the EntriesResponse.
 //not sure if this is good practice or if I should rewrite some redundant code
