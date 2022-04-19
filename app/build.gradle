@@ -19,6 +19,7 @@ android {
         properties.load(project.rootProject.file('local.properties').newDataInputStream())
         buildConfigField( "String", "API_KEY", "${properties.getProperty('API_KEY')}")
         buildConfigField( "String", "APP_ID", "${properties.getProperty('APP_ID')}")
+        buildConfigField( "String", "YANDEX_KEY", "${properties.getProperty('YANDEX_KEY')}")
     }
 
     buildTypes {
