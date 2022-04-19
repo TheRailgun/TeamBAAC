@@ -9,20 +9,21 @@ import androidx.lifecycle.Observer
 import com.example.quintrixgroupproject.api.EntriesResponse
 import com.example.quintrixgroupproject.api.LemmasResponse
 import com.example.quintrixgroupproject.api.OxfordFetcher
+import com.example.quintrixgroupproject.translation.TranslateFetcher
+import com.example.quintrixgroupproject.translation.TranslateResponse
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val oxfordLiveDataEntries : LiveData<EntriesResponse> = OxfordFetcher().getEntries()
-        oxfordLiveDataEntries.observe(
+
+        val translateLiveDataEntries : LiveData<TranslateResponse> = TranslateFetcher()
+            .translateText("Sample Text", "en-es")
+        translateLiveDataEntries.observe(
             this,
-            Observer { Log.d(TAG, "Response for entries received = $it" ) }
-        )
-        val oxfordLiveDataLemmas : LiveData<LemmasResponse> = OxfordFetcher().getLemmas()
-        oxfordLiveDataLemmas.observe(
-            this,
-            Observer { Log.d(TAG, "Response for lemmas received = $it") }
+            Observer {
+                Log.d(TAG, "Response for translate = $it")
+            }
         )
     }
 }

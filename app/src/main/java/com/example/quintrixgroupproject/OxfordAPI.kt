@@ -12,8 +12,8 @@ import java.util.*
 //For some reason I can't move this file into the api package without breaking the BuildConfig
 //Look into this later
 
-const val api_key : String = BuildConfig.API_KEY
-const val app_id : String = BuildConfig.APP_ID
+const val api_key : String = BuildConfig.O_API_KEY
+const val app_id : String = BuildConfig.O_APP_ID
 
 interface OxfordAPI {
 
