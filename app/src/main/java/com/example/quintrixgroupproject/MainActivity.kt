@@ -1,9 +1,12 @@
 package com.example.quintrixgroupproject
 
 import android.content.ContentValues.TAG
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import com.example.quintrixgroupproject.api.EntriesResponse
@@ -25,5 +28,13 @@ class MainActivity : AppCompatActivity() {
                 Log.d(TAG, "Response for translate = $it")
             }
         )
+    }
+
+    fun viewTranslation(view: View) {
+        val intent = Intent(this@MainActivity, TranslationActivity::class.java)
+        val txt : TextView = findViewById(R.id.editTextTranslation)
+        val query = txt.text.toString()
+        intent.putExtra("query", query)
+        startActivity(intent)
     }
 }
