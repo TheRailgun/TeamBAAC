@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quintrixgroupproject.BuildConfig
 import com.example.quintrixgroupproject.OxfordAPI
-import com.example.quintrixgroupproject.api_key
-import com.example.quintrixgroupproject.app_id
+import com.example.quintrixgroupproject.o_api_key
+import com.example.quintrixgroupproject.o_app_id
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

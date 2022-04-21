@@ -20,6 +20,8 @@ android {
         buildConfigField( "String", "O_API_KEY", "${properties.getProperty('O_API_KEY')}")
         buildConfigField( "String", "O_APP_ID", "${properties.getProperty('O_APP_ID')}")
         buildConfigField( "String", "YANDEX_KEY", "${properties.getProperty('YANDEX_KEY')}")
+        buildConfigField( "String", "MW_D_API_KEY", "${properties.get('MW_D_API_KEY')}")
+        buildConfigField( "String", "MW_T_API_KEY", "${properties.get('MW_T_API_KEY')}")
     }
 
     buildTypes {
