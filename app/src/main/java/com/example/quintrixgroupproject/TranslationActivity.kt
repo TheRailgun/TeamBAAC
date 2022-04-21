@@ -3,7 +3,9 @@ package com.example.quintrixgroupproject
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.EditText
+import android.widget.Spinner
 import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
@@ -20,6 +22,20 @@ class TranslationActivity : AppCompatActivity() {
         textView = findViewById<View>(R.id.textView) as TextView
         editTextView = findViewById(R.id.editTextTranslation) as EditText
         editTextView!!.setText("${intent.getStringExtra("query")}")
+
+        val spinner: Spinner = findViewById(R.id.source_lang)
+// Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.languages_array,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            // Apply the adapter to the spinner
+            spinner.adapter = adapter
+        }
+
     }
 
     fun translate(view: View?){
