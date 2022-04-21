@@ -33,12 +33,12 @@ class OxfordFetcher {
     }
 
     //replace string with EntriesResponse
-    fun getEntries() : LiveData<EntriesResponse> {
+    fun getEntries(userWord : String) : LiveData<EntriesResponse> {
         val responseLiveData : MutableLiveData<EntriesResponse> = MutableLiveData()
         //replace userWord w/ what the user puts in the EditText
         //userWord = "programs" return null for the entries b/c it is an inflection and not root word
         //programming doesn't return null (even though this seems like it is also an inflection)
-        val userWord = "programming"
+        //val userWord = "programming"
         val oxfordRequest : Call<EntriesResponse> = oxfordApiJSON.getEntries(getHeaderMap(), userWord)
 
         oxfordRequest.enqueue(object : Callback<EntriesResponse> {
@@ -59,9 +59,9 @@ class OxfordFetcher {
         return responseLiveData
     }
 
-    fun getLemmas() : LiveData<LemmasResponse> {
+    fun getLemmas(userWord : String) : LiveData<LemmasResponse> {
         val responseLiveData : MutableLiveData<LemmasResponse> = MutableLiveData()
-        val userWord = "programming"
+        //val userWord = "programming"
         val oxfordRequest : Call<LemmasResponse> = oxfordApiJSON.getLemmas(getHeaderMap(), userWord)
 
         oxfordRequest.enqueue(object : Callback<LemmasResponse> {

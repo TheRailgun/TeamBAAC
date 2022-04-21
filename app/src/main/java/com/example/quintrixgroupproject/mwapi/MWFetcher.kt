@@ -35,18 +35,18 @@ class MWFetcher {
     //should maybe refactor these so that there is only one function that takes in
     //a function as a parameter b/c there is a lot of rewritten code b/w the fetcher classes
     //as of right now
-    fun getDictionaryEntry() : LiveData<List<DictionaryResponse>> {
-        val responseLiveData : MutableLiveData<List<DictionaryResponse>> = MutableLiveData()
-        val userWord = "bag"
-        val mwRequest : Call<List<DictionaryResponse>> = mwApiJSON.getDictionaryEntry(userWord)
+    fun getDictionaryEntry(userWord : String) : LiveData<List<DictionaryResponse2Item>> {
+        val responseLiveData : MutableLiveData<List<DictionaryResponse2Item>> = MutableLiveData()
+        //val userWord = "programming"
+        val mwRequest : Call<List<DictionaryResponse2Item>> = mwApiJSON.getDictionaryEntry(userWord)
 
-        mwRequest.enqueue(object : Callback<List<DictionaryResponse>> {
-            override fun onResponse(call: Call<List<DictionaryResponse>>, response: Response<List<DictionaryResponse>>) {
+        mwRequest.enqueue(object : Callback<List<DictionaryResponse2Item>> {
+            override fun onResponse(call: Call<List<DictionaryResponse2Item>>, response: Response<List<DictionaryResponse2Item>>) {
                 Log.d(TAG, "MW dictionary entry received = ${response.body()}")
                 responseLiveData.value = response.body()
             }
 
-            override fun onFailure(call: Call<List<DictionaryResponse>>, t: Throwable) {
+            override fun onFailure(call: Call<List<DictionaryResponse2Item>>, t: Throwable) {
                 Log.e(TAG, "Failed to fetch MW dictionary entry", t)
             }
 
@@ -54,18 +54,18 @@ class MWFetcher {
         return responseLiveData
     }
 
-    fun getThesaurusEntry() : LiveData<List<ThesaurusResponse>> {
-        val responseLiveData : MutableLiveData<List<ThesaurusResponse>> = MutableLiveData()
-        val userWord = "programming"
-        val mwRequest : Call<List<ThesaurusResponse>> = mwApiJSON.getThesaurusEntry(userWord)
+    fun getThesaurusEntry(userWord : String) : LiveData<List<ThesaurusResponse2Item>> {
+        val responseLiveData : MutableLiveData<List<ThesaurusResponse2Item>> = MutableLiveData()
+        //val userWord = "programming"
+        val mwRequest : Call<List<ThesaurusResponse2Item>> = mwApiJSON.getThesaurusEntry(userWord)
 
-        mwRequest.enqueue(object : Callback<List<ThesaurusResponse>> {
-            override fun onResponse(call: Call<List<ThesaurusResponse>>, response: Response<List<ThesaurusResponse>>) {
+        mwRequest.enqueue(object : Callback<List<ThesaurusResponse2Item>> {
+            override fun onResponse(call: Call<List<ThesaurusResponse2Item>>, response: Response<List<ThesaurusResponse2Item>>) {
                 Log.d(TAG, "MW thesaurus entry received = ${response.body()}")
                 responseLiveData.value = response.body()
             }
 
-            override fun onFailure(call: Call<List<ThesaurusResponse>>, t: Throwable) {
+            override fun onFailure(call: Call<List<ThesaurusResponse2Item>>, t: Throwable) {
                 Log.e(TAG, "Failed to fetch MW thesaurus entry", t)
             }
 
