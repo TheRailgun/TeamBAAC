@@ -3,4 +3,12 @@
     <string name="search_button">Search</string>
     <string name="word_prompt">Enter word here</string>
     <string name="thesaurus_button">Thesaurus</string>
+    <string-array name="planets_array">
+        <item>English</item>
+        <item>Spanish</item>
+        <item>German</item>
+        <item>Japanese</item>
+        <item>Arabic</item>
+    </string-array>
+
 </resources>
