@@ -1,24 +1,30 @@
 package com.example.quintrixgroupproject
 
 import android.content.ContentValues.TAG
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
-import com.example.quintrixgroupproject.mwapi.*
+import com.example.quintrixgroupproject.mwapi.DictionaryResponse2Item
+import com.example.quintrixgroupproject.mwapi.MWFetcher
+import com.example.quintrixgroupproject.mwapi.ThesaurusResponse2Item
 import com.example.quintrixgroupproject.oxfordapi.EntriesResponse
 import com.example.quintrixgroupproject.oxfordapi.LemmasResponse
 import com.example.quintrixgroupproject.oxfordapi.OxfordFetcher
-import com.google.gson.internal.LinkedTreeMap
+import com.example.quintrixgroupproject.translation.TranslateFetcher
+import com.example.quintrixgroupproject.translation.TranslateResponse
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val userEditText = findViewById<EditText>(R.id.editTextTextPersonName)
+        val userEditText = findViewById<EditText>(R.id.editTextTranslation)
         val searchButton = findViewById<Button>(R.id.search_button)
 
         searchButton.setOnClickListener {
@@ -48,7 +54,27 @@ class MainActivity : AppCompatActivity() {
                 Observer { Log.d(TAG, "Response for MW thesaurus received = $it") }
             )
         }
-        /*
+        
+
+        val translateLiveDataEntries : LiveData<TranslateResponse> = TranslateFetcher()
+            .translateText("Sample Text", "en-es")
+        translateLiveDataEntries.observe(
+            this,
+            Observer {
+                Log.d(TAG, "Response for translate = $it")
+            }
+        )
+    }
+
+    fun viewTranslation(view: View) {
+        val intent = Intent(this@MainActivity, TranslationActivity::class.java)
+        val txt : TextView = findViewById(R.id.editTextTranslation)
+        val query = txt.text.toString()
+        intent.putExtra("query", query)
+        startActivity(intent)
+    }
+}
+/*
         val oxfordLiveDataEntries : LiveData<EntriesResponse> = OxfordFetcher().getEntries()
         oxfordLiveDataEntries.observe(
             this,
@@ -89,5 +115,3 @@ class MainActivity : AppCompatActivity() {
             Observer { Log.d(TAG, "Response for MW thesaurus received = $it") }
         )
          */
-    }
-}

@@ -3,4 +3,13 @@
     <string name="search_button">Search</string>
     <string name="word_prompt">Enter word here</string>
     <string name="thesaurus_button">Thesaurus</string>
+    <string name="translate_text">Translate Text</string>
+    <string-array name="languages_array">
+        <item>English</item>
+        <item>German</item>
+        <item>Spanish</item>
+        <item>Japanese</item>
+        <item>Arabic</item>
+    </string-array>
+
 </resources>

@@ -19,9 +19,9 @@ android {
         properties.load(project.rootProject.file('local.properties').newDataInputStream())
         buildConfigField( "String", "O_API_KEY", "${properties.getProperty('O_API_KEY')}")
         buildConfigField( "String", "O_APP_ID", "${properties.getProperty('O_APP_ID')}")
+        buildConfigField( "String", "YANDEX_KEY", "${properties.getProperty('YANDEX_KEY')}")
         buildConfigField( "String", "MW_D_API_KEY", "${properties.get('MW_D_API_KEY')}")
         buildConfigField( "String", "MW_T_API_KEY", "${properties.get('MW_T_API_KEY')}")
-
     }
 
     buildTypes {
@@ -45,6 +45,9 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.5.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
@@ -53,4 +56,5 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-scalars:2.5.0'
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 }
