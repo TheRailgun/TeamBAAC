@@ -1,7 +1,9 @@
 package com.example.quintrixgroupproject
 
 import com.example.quintrixgroupproject.mwapi.DictionaryResponse
+import com.example.quintrixgroupproject.mwapi.DictionaryResponse2Item
 import com.example.quintrixgroupproject.mwapi.ThesaurusResponse
+import com.example.quintrixgroupproject.mwapi.ThesaurusResponse2Item
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.HeaderMap
@@ -13,9 +15,9 @@ const val mw_t_api_key = BuildConfig.MW_T_API_KEY
 interface MWAPI {
 
     @GET("collegiate/json/{word}?key=$mw_d_api_key")
-    fun getDictionaryEntry(@Path("word") userWord : String) : Call<List<DictionaryResponse>>
+    fun getDictionaryEntry(@Path("word") userWord : String) : Call<List<DictionaryResponse2Item>>
 
     @GET("thesaurus/json/{word}?key=$mw_t_api_key")
-    fun getThesaurusEntry(@Path("word") userWord: String) : Call<List<ThesaurusResponse>>
+    fun getThesaurusEntry(@Path("word") userWord: String) : Call<List<ThesaurusResponse2Item>>
 
 }

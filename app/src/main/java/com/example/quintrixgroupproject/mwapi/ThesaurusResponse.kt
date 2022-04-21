@@ -16,7 +16,7 @@ data class ThesaurusResponse(
 )
 
 data class TDef(
-    val sseq : List<List<List<SseqElement>>>
+    val sseq : List<List<List<Any>>>
 )
 
 
