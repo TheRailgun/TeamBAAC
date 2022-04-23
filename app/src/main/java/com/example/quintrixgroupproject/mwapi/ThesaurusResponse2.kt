@@ -19,7 +19,7 @@ data class T2Hwi(
 )
 
 data class T2Meta(
-    val ants: List<Any>,
+    val ants: List<List<String>>,
     val id: String,
     val offensive: Boolean,
     val section: String,

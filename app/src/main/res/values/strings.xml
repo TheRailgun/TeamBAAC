@@ -1,9 +1,13 @@
 <resources>
     <string name="app_name">Quicktionary</string>
-    <string name="search_button">Search</string>
+    <string name="dictionary_button">Dictionary</string>
     <string name="word_prompt">Enter word here</string>
     <string name="thesaurus_button">Thesaurus</string>
+    <string name="translate_button">Translations</string>
     <string name="translate_text">Translate Text</string>
+    <string name="thesaurus_activity_button">Find Synonyms</string>
+    <string name="antonyms">Antonyms</string>
+    <string name="synonyms">Synonyms</string>
     <string-array name="languages_array">
         <item>English</item>
         <item>German</item>
