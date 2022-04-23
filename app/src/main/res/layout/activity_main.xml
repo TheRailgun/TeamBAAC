@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/search_button"
+        android:id="@+id/openDictionaryButton"
         android:layout_width="101dp"
         android:layout_height="44dp"
         android:layout_marginEnd="8dp"
@@ -18,7 +18,8 @@
         app:layout_constraintEnd_toStartOf="@+id/editTextTranslation"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.039" />
+        app:layout_constraintVertical_bias="0.039"
+        android:onClick="viewDef"/>
 
     <Button
         android:id="@+id/openTranslationButton"
@@ -26,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="open translation"
-        app:layout_constraintTop_toBottomOf="@id/search_button"/>
+        app:layout_constraintTop_toBottomOf="@id/openDictionaryButton"/>
 
     <EditText
         android:id="@+id/editTextTranslation"
