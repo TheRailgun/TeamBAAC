@@ -13,49 +13,69 @@
         android:onClick="translate"
         android:text="@string/translate_text"
         android:textAlignment="center"
+        android:backgroundTint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.534"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.407" />
+        app:layout_constraintVertical_bias="0.47" />
 
     <EditText
         android:id="@+id/editTextTranslation"
-        android:layout_width="142dp"
-        android:layout_height="37dp"
+        android:layout_width="136dp"
+        android:layout_height="49dp"
         android:ems="10"
         android:hint="@string/word_prompt"
         android:inputType="textAutoComplete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.079"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.298" />
+        app:layout_constraintVertical_bias="0.312" />
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="101dp"
-        android:layout_height="44dp"
+        android:layout_width="138dp"
+        android:layout_height="49dp"
         android:gravity="center"
         android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.851"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.301" />
+        app:layout_constraintVertical_bias="0.59" />
 
     <Spinner
         android:id="@+id/source_lang"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="252dp"
-        android:layout_marginBottom="620dp"
+        android:layout_width="187dp"
+        android:layout_height="33dp"
+        android:layout_marginEnd="112dp"
+        android:layout_marginBottom="612dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/thesaurus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:text="@string/thesaurus_button"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="645dp" />
+
+    <Button
+        android:id="@+id/definition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:text="Definition"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button"
+        tools:layout_editor_absoluteY="645dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

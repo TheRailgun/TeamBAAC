@@ -3,18 +3,16 @@ package com.example.quintrixgroupproject
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.EditText
-import android.widget.Spinner
-import android.widget.TextView
+import android.widget.*
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import com.example.quintrixgroupproject.translation.TranslateFetcher
 import com.example.quintrixgroupproject.translation.TranslateResponse
 
-class TranslationActivity : AppCompatActivity() {
+class TranslationActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     var textView: TextView? = null
     var editTextView : EditText? = null
+    var selectedLanguage : String = "es"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +33,7 @@ class TranslationActivity : AppCompatActivity() {
             // Apply the adapter to the spinner
             spinner.adapter = adapter
         }
+        spinner.onItemSelectedListener = this
 
     }
 
@@ -43,13 +42,15 @@ class TranslationActivity : AppCompatActivity() {
         var str = StringBuilder()
         val translateLiveDataEntries : LiveData<TranslateResponse>? = query?.let {
             TranslateFetcher()
-                .translateText(it, "en-es")
+                .translateText(it, "en-${selectedLanguage}")
         }
         translateLiveDataEntries?.observe(this) {
             for (i in it.text)
                 str.append(i)
             textView!!.setText("${str.toString()}")
         }
+
+
 
         //  textView!!.setText()
     /*val translateLiveDataEntries : LiveData<TranslateResponse> = TranslateFetcher()
@@ -60,5 +61,26 @@ class TranslationActivity : AppCompatActivity() {
                 Log.d(TAG, "Response for translate = $it")
             }
         )*/
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, pos: Int, id: Long) {
+        val text: String = parent?.getItemAtPosition(pos).toString()
+        selectedLanguage = languageSelection(text)
+    }
+
+    override fun onNothingSelected(p0: AdapterView<*>?) {
+        TODO("Not yet implemented")
+    }
+
+    fun languageSelection(lang : String):String {
+        var result = when(lang) {
+            "English" -> "en"
+            "German" -> "de"
+            "Spanish" -> "es"
+            "Japanese" -> "ja"
+            "Arabic" -> "ar"
+            else-> ""
+        }
+        return result
     }
 }
