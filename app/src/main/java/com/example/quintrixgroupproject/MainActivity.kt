@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val userEditText = findViewById<EditText>(R.id.editTextTranslation)
-        val searchButton = findViewById<Button>(R.id.search_button)
+        val searchButton = findViewById<Button>(R.id.openDictionaryButton)
 
         searchButton.setOnClickListener {
             //should have a check if editText is not empty
@@ -68,6 +68,13 @@ class MainActivity : AppCompatActivity() {
 
     fun viewTranslation(view: View) {
         val intent = Intent(this@MainActivity, TranslationActivity::class.java)
+        val txt : TextView = findViewById(R.id.editTextTranslation)
+        val query = txt.text.toString()
+        intent.putExtra("query", query)
+        startActivity(intent)
+    }
+    fun viewThesaurus(view: View) {
+        val intent = Intent(this@MainActivity, ThesaurusActivity::class.java)
         val txt : TextView = findViewById(R.id.editTextTranslation)
         val query = txt.text.toString()
         intent.putExtra("query", query)

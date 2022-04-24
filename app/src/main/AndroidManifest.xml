@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.QuintrixGroupProject">
         <activity
+            android:name=".ThesaurusActivity"
+            android:exported="false" />
+        <activity
             android:name=".TranslationActivity"
             android:exported="false" />
         <activity
