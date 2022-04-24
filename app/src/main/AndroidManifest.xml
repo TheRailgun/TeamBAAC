@@ -18,6 +18,9 @@
             android:name=".TranslationActivity"
             android:exported="false" />
         <activity
+            android:name=".ThesaurusActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

@@ -14,6 +14,7 @@
         android:gravity="center"
         android:text="@string/dictionary_button"
         android:textAlignment="center"
+        android:onClick="viewDef"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/editTextTranslation"
         app:layout_constraintLeft_toLeftOf="parent"
