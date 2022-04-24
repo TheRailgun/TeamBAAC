@@ -117,6 +117,7 @@ class OxfordActivity : AppCompatActivity() {
                                                                         for(l in 0 until (oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.senses?.size ?: 0)){
                                                                             textViewDefDef?.append("-> " + oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.senses?.get(l)?.shortDefinitions?.get(0).toString())
                                                                             textViewDefDef?.append(System.getProperty("line.separator"))
+                                                                            textViewDefDef?.append(System.getProperty("line.separator"))
                                                                         }
                                                                         /*
                                                                         for(l in 0 until (oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.pronunciations?.size ?: 0)){
@@ -175,6 +176,7 @@ class OxfordActivity : AppCompatActivity() {
                             for(k in 0 until (oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.size ?: 0)){
                                 for(l in 0 until (oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.senses?.size ?: 0)){
                                     textViewDefDef?.append("-> " + oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.senses?.get(l)?.shortDefinitions?.get(0).toString())
+                                    textViewDefDef?.append(System.getProperty("line.separator"))
                                     textViewDefDef?.append(System.getProperty("line.separator"))
                                 }
                                 /*
@@ -284,6 +286,7 @@ class OxfordActivity : AppCompatActivity() {
                                                                         for(l in 0 until (oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.senses?.size ?: 0)){
                                                                             textViewDefDef?.append("-> " + oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.senses?.get(l)?.shortDefinitions?.get(0).toString())
                                                                             textViewDefDef?.append(System.getProperty("line.separator"))
+                                                                            textViewDefDef?.append(System.getProperty("line.separator"))
                                                                         }
                                                                         /*
                                                                         for(l in 0 until (oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.pronunciations?.size ?: 0)){
@@ -340,6 +343,7 @@ class OxfordActivity : AppCompatActivity() {
                             for(k in 0 until (oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.size ?: 0)){
                                 for(l in 0 until (oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.senses?.size ?: 0)){
                                     textViewDefDef?.append("-> " + oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.senses?.get(l)?.shortDefinitions?.get(0).toString())
+                                    textViewDefDef?.append(System.getProperty("line.separator"))
                                     textViewDefDef?.append(System.getProperty("line.separator"))
                                 }
                                 /*
