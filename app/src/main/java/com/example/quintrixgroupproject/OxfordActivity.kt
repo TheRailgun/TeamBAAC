@@ -18,12 +18,21 @@ import kotlinx.coroutines.launch
 class OxfordActivity : AppCompatActivity() {
 
     var textViewDef: TextView? = null
+    //var textViewDefPoS : TextView? = null
+    //didn't include part of speech because for the dozen or so different words I tried what came back
+    //was always null so it just left a big gap in the layout which didn't look good
+    //could have replace with an error message in the textview but getting an error for most words looks bad
+    var textViewDefPro : TextView? = null
+    var textViewDefDef : TextView? = null
     var editTextDef: EditText? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_oxford)
         textViewDef = findViewById(R.id.textViewDef)
+        //textViewDefPoS = findViewById(R.id.textViewDefPos)
+        textViewDefPro = findViewById(R.id.textViewDefPro)
+        textViewDefDef = findViewById(R.id.textViewDefDef)
         editTextDef = findViewById(R.id.editTextDef)
         //call the api for the first time here in oncreate
         //maybe don't use global scoper
@@ -49,6 +58,8 @@ class OxfordActivity : AppCompatActivity() {
                 editTextDef?.setText(potInfQuery)
                 if (entryFound == null || entryFound == false) {
                     textViewDef?.text = "Word not found. Please try a different spelling or inflection."
+                    textViewDefPro?.text = ""
+                    textViewDefDef?.text = ""
                     Log.d("onCreate OxfordActivity", "textview in observe = ${textViewDef?.text}")
 
                     oxfordLemmas.observe(
@@ -80,27 +91,33 @@ class OxfordActivity : AppCompatActivity() {
                                                         if (entryFound == null || entryFound == false) {
                                                             textViewDef?.text =
                                                                 "Word not found. Please try a different spelling or inflection."
+                                                            textViewDefPro?.text = ""
+                                                            textViewDefDef?.text = ""
                                                         } else {
                                                             textViewDef?.text = ""
+                                                            //textViewDefPoS?.text = ""
+                                                            textViewDefPro?.text = ""
+                                                            textViewDefDef?.text = ""
                                                             //textViewDef?.append(oxfordEntries?.value.toString())
                                                             textViewDef?.append(oxfordEntries?.value?.results?.get(0)?.word ?: potInfQuery)
-                                                            textViewDef?.append(System.getProperty("line.separator"))
-                                                            textViewDef?.append(oxfordEntries?.value?.results?.get(0)?.language ?: "en-us")
-                                                            textViewDef?.append(System.getProperty("line.separator"))
+                                                            //textViewDef?.append(System.getProperty("line.separator"))
+                                                            //textViewDef?.append(oxfordEntries?.value?.results?.get(0)?.language ?: "en-us")
+                                                            //textViewDef?.append(System.getProperty("line.separator"))
                                                             for(i in 0 until (oxfordEntries?.value?.results?.size ?: 0)){
 
                                                                 if(i == 0){
                                                                     for(l in 0 until (oxfordEntries?.value?.results?.get(0)?.lexicalEntries?.get(0)?.entries?.get(0)?.pronunciations?.size ?: 0)){
-                                                                        textViewDef?.append(oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.pronunciations?.get(l)?.phoneticSpelling)
-                                                                        textViewDef?.append(System.getProperty("line.separator"))
+                                                                        textViewDefPro?.append(oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.pronunciations?.get(l)?.phoneticSpelling)
+                                                                        textViewDefPro?.append(System.getProperty("line.separator"))
                                                                     }
                                                                 }
 
                                                                 for(j in 0 until (oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.size ?: 0)){
                                                                     for(k in 0 until (oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.size ?: 0)){
                                                                         for(l in 0 until (oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.senses?.size ?: 0)){
-                                                                            textViewDef?.append("-> " + oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.senses?.get(l)?.shortDefinitions?.get(0).toString())
-                                                                            textViewDef?.append(System.getProperty("line.separator"))
+                                                                            textViewDefDef?.append("-> " + oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.senses?.get(l)?.shortDefinitions?.get(0).toString())
+                                                                            textViewDefDef?.append(System.getProperty("line.separator"))
+                                                                            textViewDefDef?.append(System.getProperty("line.separator"))
                                                                         }
                                                                         /*
                                                                         for(l in 0 until (oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.pronunciations?.size ?: 0)){
@@ -138,25 +155,29 @@ class OxfordActivity : AppCompatActivity() {
                 } else {
                     editTextDef?.setText(potInfQuery)
                     textViewDef?.text = ""
+                    //textViewDefPoS?.text = ""
+                    textViewDefPro?.text = ""
+                    textViewDefDef?.text = ""
                     //textViewDef?.append(oxfordEntries?.value.toString())
                     textViewDef?.append(oxfordEntries?.value?.results?.get(0)?.word ?: potInfQuery)
-                    textViewDef?.append(System.getProperty("line.separator"))
-                    textViewDef?.append(oxfordEntries?.value?.results?.get(0)?.language ?: "en-us")
-                    textViewDef?.append(System.getProperty("line.separator"))
+                    //textViewDef?.append(System.getProperty("line.separator"))
+                    //textViewDef?.append(oxfordEntries?.value?.results?.get(0)?.language ?: "en-us")
+                    //textViewDef?.append(System.getProperty("line.separator"))
                     for(i in 0 until (oxfordEntries?.value?.results?.size ?: 0)){
 
                         if(i == 0){
                             for(l in 0 until (oxfordEntries?.value?.results?.get(0)?.lexicalEntries?.get(0)?.entries?.get(0)?.pronunciations?.size ?: 0)){
-                                textViewDef?.append(oxfordEntries?.value?.results?.get(0)?.lexicalEntries?.get(0)?.entries?.get(0)?.pronunciations?.get(l)?.phoneticSpelling)
-                                textViewDef?.append(System.getProperty("line.separator"))
+                                textViewDefPro?.append(oxfordEntries?.value?.results?.get(0)?.lexicalEntries?.get(0)?.entries?.get(0)?.pronunciations?.get(l)?.phoneticSpelling)
+                                textViewDefPro?.append(System.getProperty("line.separator"))
                             }
                         }
 
                         for(j in 0 until (oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.size ?: 0)){
                             for(k in 0 until (oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.size ?: 0)){
                                 for(l in 0 until (oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.senses?.size ?: 0)){
-                                    textViewDef?.append("-> " + oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.senses?.get(l)?.shortDefinitions?.get(0).toString())
-                                    textViewDef?.append(System.getProperty("line.separator"))
+                                    textViewDefDef?.append("-> " + oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.senses?.get(l)?.shortDefinitions?.get(0).toString())
+                                    textViewDefDef?.append(System.getProperty("line.separator"))
+                                    textViewDefDef?.append(System.getProperty("line.separator"))
                                 }
                                 /*
                                 for(l in 0 until (oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.pronunciations?.size ?: 0)){
@@ -180,6 +201,8 @@ class OxfordActivity : AppCompatActivity() {
 
     fun getDefinition(view: View?) {
         textViewDef = findViewById(R.id.textViewDef)
+        textViewDefPro = findViewById(R.id.textViewDefPro)
+        textViewDefDef = findViewById(R.id.textViewDefDef)
         editTextDef = findViewById(R.id.editTextDef)
         //call the api for the first time here in oncreate
         //maybe don't use global scoper
@@ -206,6 +229,8 @@ class OxfordActivity : AppCompatActivity() {
                 editTextDef?.setText(potInfQuery)
                 if (entryFound == null || entryFound == false) {
                     textViewDef?.text = "Word not found. Please try a different spelling or inflection."
+                    textViewDefPro?.text = ""
+                    textViewDefDef?.text = ""
                     Log.d("onCreate OxfordActivity", "textview in observe = ${textViewDef?.text}")
 
                     oxfordLemmas.observe(
@@ -237,25 +262,31 @@ class OxfordActivity : AppCompatActivity() {
                                                         if (entryFound == null || entryFound == false) {
                                                             textViewDef?.text =
                                                                 "Word not found. Please try a different spelling or inflection."
+                                                            textViewDefPro?.text = ""
+                                                            textViewDefDef?.text = ""
                                                         } else {
                                                             textViewDef?.text = ""
+                                                            //textViewDefPoS?.text = ""
+                                                            textViewDefPro?.text = ""
+                                                            textViewDefDef?.text = ""
                                                             //textViewDef?.append(oxfordEntries?.value.toString())
                                                             textViewDef?.append(oxfordEntries?.value?.results?.get(0)?.word ?: potInfQuery)
-                                                            textViewDef?.append(System.getProperty("line.separator"))
-                                                            textViewDef?.append(oxfordEntries?.value?.results?.get(0)?.language ?: "en-us")
-                                                            textViewDef?.append(System.getProperty("line.separator"))
+                                                            //textViewDef?.append(System.getProperty("line.separator"))
+                                                            //textViewDef?.append(oxfordEntries?.value?.results?.get(0)?.language ?: "en-us")
+                                                            //textViewDef?.append(System.getProperty("line.separator"))
                                                             for(i in 0 until (oxfordEntries?.value?.results?.size ?: 0)){
                                                                 if(i == 0){
                                                                     for(l in 0 until (oxfordEntries?.value?.results?.get(0)?.lexicalEntries?.get(0)?.entries?.get(0)?.pronunciations?.size ?: 0)){
-                                                                        textViewDef?.append(oxfordEntries?.value?.results?.get(0)?.lexicalEntries?.get(0)?.entries?.get(0)?.pronunciations?.get(l)?.phoneticSpelling)
-                                                                        textViewDef?.append(System.getProperty("line.separator"))
+                                                                        textViewDefPro?.append(oxfordEntries?.value?.results?.get(0)?.lexicalEntries?.get(0)?.entries?.get(0)?.pronunciations?.get(l)?.phoneticSpelling)
+                                                                        textViewDefPro?.append(System.getProperty("line.separator"))
                                                                     }
                                                                 }
                                                                 for(j in 0 until (oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.size ?: 0)){
                                                                     for(k in 0 until (oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.size ?: 0)){
                                                                         for(l in 0 until (oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.senses?.size ?: 0)){
-                                                                            textViewDef?.append("-> " + oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.senses?.get(l)?.shortDefinitions?.get(0).toString())
-                                                                            textViewDef?.append(System.getProperty("line.separator"))
+                                                                            textViewDefDef?.append("-> " + oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.senses?.get(l)?.shortDefinitions?.get(0).toString())
+                                                                            textViewDefDef?.append(System.getProperty("line.separator"))
+                                                                            textViewDefDef?.append(System.getProperty("line.separator"))
                                                                         }
                                                                         /*
                                                                         for(l in 0 until (oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.pronunciations?.size ?: 0)){
@@ -293,23 +324,27 @@ class OxfordActivity : AppCompatActivity() {
                 } else {
                     editTextDef?.setText(potInfQuery)
                     textViewDef?.text = ""
+                    //textViewDefPoS?.text = ""
+                    textViewDefPro?.text = ""
+                    textViewDefDef?.text = ""
                     //textViewDef?.append(oxfordEntries?.value.toString())
                     textViewDef?.append(oxfordEntries?.value?.results?.get(0)?.word ?: potInfQuery)
-                    textViewDef?.append(System.getProperty("line.separator"))
-                    textViewDef?.append(oxfordEntries?.value?.results?.get(0)?.language ?: "en-us")
-                    textViewDef?.append(System.getProperty("line.separator"))
+                    //textViewDef?.append(System.getProperty("line.separator"))
+                    //textViewDef?.append(oxfordEntries?.value?.results?.get(0)?.language ?: "en-us")
+                    //textViewDef?.append(System.getProperty("line.separator"))
                     for(i in 0 until (oxfordEntries?.value?.results?.size ?: 0)){
                         if(i == 0){
                             for(l in 0 until (oxfordEntries?.value?.results?.get(0)?.lexicalEntries?.get(0)?.entries?.get(0)?.pronunciations?.size ?: 0)){
-                                textViewDef?.append(oxfordEntries?.value?.results?.get(0)?.lexicalEntries?.get(0)?.entries?.get(0)?.pronunciations?.get(l)?.phoneticSpelling)
-                                textViewDef?.append(System.getProperty("line.separator"))
+                                textViewDefPro?.append(oxfordEntries?.value?.results?.get(0)?.lexicalEntries?.get(0)?.entries?.get(0)?.pronunciations?.get(l)?.phoneticSpelling)
+                                textViewDefPro?.append(System.getProperty("line.separator"))
                             }
                         }
                         for(j in 0 until (oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.size ?: 0)){
                             for(k in 0 until (oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.size ?: 0)){
                                 for(l in 0 until (oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.senses?.size ?: 0)){
-                                    textViewDef?.append("-> " + oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.senses?.get(l)?.shortDefinitions?.get(0).toString())
-                                    textViewDef?.append(System.getProperty("line.separator"))
+                                    textViewDefDef?.append("-> " + oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.senses?.get(l)?.shortDefinitions?.get(0).toString())
+                                    textViewDefDef?.append(System.getProperty("line.separator"))
+                                    textViewDefDef?.append(System.getProperty("line.separator"))
                                 }
                                 /*
                                 for(l in 0 until (oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.pronunciations?.size ?: 0)){
