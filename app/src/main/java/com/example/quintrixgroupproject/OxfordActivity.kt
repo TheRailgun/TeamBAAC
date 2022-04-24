@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import com.example.quintrixgroupproject.oxfordapi.EntriesResponse
@@ -84,19 +85,30 @@ class OxfordActivity : AppCompatActivity() {
                                                             //textViewDef?.append(oxfordEntries?.value.toString())
                                                             textViewDef?.append(oxfordEntries?.value?.results?.get(0)?.word ?: potInfQuery)
                                                             textViewDef?.append(System.getProperty("line.separator"))
-                                                            textViewDef?.append(oxfordEntries?.value?.results?.get(0)?.language)
+                                                            textViewDef?.append(oxfordEntries?.value?.results?.get(0)?.language ?: "en-us")
                                                             textViewDef?.append(System.getProperty("line.separator"))
                                                             for(i in 0 until (oxfordEntries?.value?.results?.size ?: 0)){
+
+                                                                if(i == 0){
+                                                                    for(l in 0 until (oxfordEntries?.value?.results?.get(0)?.lexicalEntries?.get(0)?.entries?.get(0)?.pronunciations?.size ?: 0)){
+                                                                        textViewDef?.append(oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.pronunciations?.get(l)?.phoneticSpelling)
+                                                                        textViewDef?.append(System.getProperty("line.separator"))
+                                                                    }
+                                                                }
+
                                                                 for(j in 0 until (oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.size ?: 0)){
                                                                     for(k in 0 until (oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.size ?: 0)){
                                                                         for(l in 0 until (oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.senses?.size ?: 0)){
-                                                                            textViewDef?.append(oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.senses?.get(l)?.shortDefinitions.toString())
+                                                                            textViewDef?.append("-> " + oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.senses?.get(l)?.shortDefinitions?.get(0).toString())
                                                                             textViewDef?.append(System.getProperty("line.separator"))
                                                                         }
+                                                                        /*
                                                                         for(l in 0 until (oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.pronunciations?.size ?: 0)){
                                                                             textViewDef?.append(oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.pronunciations?.get(l)?.phoneticSpelling)
                                                                             textViewDef?.append(System.getProperty("line.separator"))
                                                                         }
+
+                                                                         */
 
                                                                     }
                                                                 }
@@ -120,6 +132,7 @@ class OxfordActivity : AppCompatActivity() {
                                     }
                                 }
                             }
+                            //Toast.makeText(this@OxfordActivity, "Word not found. Please try a different spelling or inflection", Toast.LENGTH_LONG).show()
                         }
                     )
                 } else {
@@ -128,19 +141,30 @@ class OxfordActivity : AppCompatActivity() {
                     //textViewDef?.append(oxfordEntries?.value.toString())
                     textViewDef?.append(oxfordEntries?.value?.results?.get(0)?.word ?: potInfQuery)
                     textViewDef?.append(System.getProperty("line.separator"))
-                    textViewDef?.append(oxfordEntries?.value?.results?.get(0)?.language)
+                    textViewDef?.append(oxfordEntries?.value?.results?.get(0)?.language ?: "en-us")
                     textViewDef?.append(System.getProperty("line.separator"))
                     for(i in 0 until (oxfordEntries?.value?.results?.size ?: 0)){
+
+                        if(i == 0){
+                            for(l in 0 until (oxfordEntries?.value?.results?.get(0)?.lexicalEntries?.get(0)?.entries?.get(0)?.pronunciations?.size ?: 0)){
+                                textViewDef?.append(oxfordEntries?.value?.results?.get(0)?.lexicalEntries?.get(0)?.entries?.get(0)?.pronunciations?.get(l)?.phoneticSpelling)
+                                textViewDef?.append(System.getProperty("line.separator"))
+                            }
+                        }
+
                         for(j in 0 until (oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.size ?: 0)){
                             for(k in 0 until (oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.size ?: 0)){
                                 for(l in 0 until (oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.senses?.size ?: 0)){
-                                    textViewDef?.append(oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.senses?.get(l)?.shortDefinitions.toString())
+                                    textViewDef?.append("-> " + oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.senses?.get(l)?.shortDefinitions?.get(0).toString())
                                     textViewDef?.append(System.getProperty("line.separator"))
                                 }
+                                /*
                                 for(l in 0 until (oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.pronunciations?.size ?: 0)){
                                     textViewDef?.append(oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.pronunciations?.get(l)?.phoneticSpelling)
                                     textViewDef?.append(System.getProperty("line.separator"))
                                 }
+
+                                 */
 
                             }
                         }
@@ -149,115 +173,6 @@ class OxfordActivity : AppCompatActivity() {
                 //Log.d("onCreate OxfordActivity", "textview in observe after if = ${textViewDef?.text}")
             }
         )
-        /*
-        //why does textView suddenly not have the text that was assigned to it in the observe call???
-        entryFound = textViewDef?.text != "Word not found. Please try a different spelling or inflection."
-        Log.d("onCreate OxfordActivity", "textView = ${textViewDef?.text}")
-        Log.d("onCreate OxfordActivity", "entryFound before lemmas = $entryFound")
-        entryFound = false
-        oxfordLemmas.observe(
-            this@OxfordActivity,
-            Observer {
-                Log.d("onCreate OxfordActivity", "lemma in observe = $it")
-                if (entryFound == null || entryFound == false) {
-                    val numResults = oxfordLemmas.value?.results?.size ?: 0
-                    outerLoop@ for (i in 0 until numResults) {
-                        var curNumLexEntry =
-                            oxfordLemmas.value?.results?.get(i)?.lexicalEntries?.size ?: 0
-                        for (j in 0 until curNumLexEntry) {
-                            var curNumInflections =
-                                oxfordLemmas.value?.results?.get(i)?.lexicalEntries?.get(j)?.inflectionOf?.size ?: 0
-                            for (k in 0 until curNumInflections) {
-                                potInfQuery =
-                                    oxfordLemmas.value?.results?.get(i)?.lexicalEntries?.get(j)?.inflectionOf?.get(k)?.text ?: ""
-                                Log.d("onCreate OxfordActivity", "query = $potInfQuery")
-                                if (potInfQuery != "") {
-                                    oxfordEntries = OF.getEntries(potInfQuery)
-                                    oxfordEntries?.observe(
-                                        this@OxfordActivity,
-                                        Observer { e ->
-                                            entryFound = e != null
-                                            Log.d("onCreate OxfordActivity", "entryFound in inner observe = $entryFound")
-                                            editTextDef?.setText(potInfQuery)
-                                            if (entryFound == null || entryFound == false) {
-                                                textViewDef?.text =
-                                                    "Word not found. Please try a different spelling or inflection."
-                                            } else {
-                                                textViewDef?.text = ""
-                                                textViewDef?.append(oxfordEntries?.value.toString())
-                                            }
-                                        }
-                                    )
-                                    Log.d("onCreate OxfordActivity", "Oxford entries = $oxfordEntries")
-                                    entryFound = textViewDef?.text != "Word not found. Please try a different spelling or inflection."
-                                    if(entryFound as Boolean){
-                                        break@outerLoop
-                                    }
-
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        )
-
-         */
-
-        //}.join()
-        //entryFound = oxfordEntries?.value != null
-        //Log.d("onCreate OxfordActivity", "lemmas after observe = ${oxfordLemmas.value}")
-        //Log.d("onCreate OxfordActivity", "entries after observe = ${oxfordEntries?.value}")
-        //Log.d("onCreate OxfordActivity", "entryFound after observe = $entryFound")
-
-
-        /*
-        if (entryFound == null || entryFound == false) {
-            val numResults = oxfordLemmas.value?.results?.size ?: 0
-            outerLoop@ for (i in 0 until numResults) {
-                var curNumLexEntry =
-                    oxfordLemmas.value?.results?.get(i)?.lexicalEntries?.size ?: 0
-                for (j in 0 until curNumLexEntry) {
-                    var curNumInflections =
-                        oxfordLemmas.value?.results?.get(i)?.lexicalEntries?.get(j)?.inflectionOf?.size ?: 0
-                    for (k in 0 until curNumInflections) {
-                        potInfQuery =
-                            oxfordLemmas.value?.results?.get(i)?.lexicalEntries?.get(j)?.inflectionOf?.get(k)?.text ?: ""
-                        if (potInfQuery != "") {
-                            oxfordEntries = OF.getEntries(potInfQuery)
-
-                            if (oxfordEntries != null) {
-                                Log.d(
-                                    "onCreate OxfordActivity",
-                                    "Oxford entries = $oxfordEntries"
-                                )
-                                entryFound = true
-                                break@outerLoop
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-         */
-
-
-        //launch(Dispatchers.Main) {
-        /*
-                editTextDef?.setText(potInfQuery)
-                if(entryFound == null || entryFound == false){
-                    textViewDef?.text = "Word not found. Please try a different spelling or inflection."
-                }
-                else{
-                    textViewDef?.text = ""
-                    textViewDef?.append(oxfordEntries?.value.toString())
-                }
-
-         */
-
-        //}
-        //}
 
 
     }
@@ -327,19 +242,28 @@ class OxfordActivity : AppCompatActivity() {
                                                             //textViewDef?.append(oxfordEntries?.value.toString())
                                                             textViewDef?.append(oxfordEntries?.value?.results?.get(0)?.word ?: potInfQuery)
                                                             textViewDef?.append(System.getProperty("line.separator"))
-                                                            textViewDef?.append(oxfordEntries?.value?.results?.get(0)?.language)
+                                                            textViewDef?.append(oxfordEntries?.value?.results?.get(0)?.language ?: "en-us")
                                                             textViewDef?.append(System.getProperty("line.separator"))
                                                             for(i in 0 until (oxfordEntries?.value?.results?.size ?: 0)){
+                                                                if(i == 0){
+                                                                    for(l in 0 until (oxfordEntries?.value?.results?.get(0)?.lexicalEntries?.get(0)?.entries?.get(0)?.pronunciations?.size ?: 0)){
+                                                                        textViewDef?.append(oxfordEntries?.value?.results?.get(0)?.lexicalEntries?.get(0)?.entries?.get(0)?.pronunciations?.get(l)?.phoneticSpelling)
+                                                                        textViewDef?.append(System.getProperty("line.separator"))
+                                                                    }
+                                                                }
                                                                 for(j in 0 until (oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.size ?: 0)){
                                                                     for(k in 0 until (oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.size ?: 0)){
                                                                         for(l in 0 until (oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.senses?.size ?: 0)){
-                                                                            textViewDef?.append(oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.senses?.get(l)?.shortDefinitions.toString())
+                                                                            textViewDef?.append("-> " + oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.senses?.get(l)?.shortDefinitions?.get(0).toString())
                                                                             textViewDef?.append(System.getProperty("line.separator"))
                                                                         }
+                                                                        /*
                                                                         for(l in 0 until (oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.pronunciations?.size ?: 0)){
                                                                             textViewDef?.append(oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.pronunciations?.get(l)?.phoneticSpelling)
                                                                             textViewDef?.append(System.getProperty("line.separator"))
                                                                         }
+
+                                                                         */
 
                                                                     }
                                                                 }
@@ -362,6 +286,7 @@ class OxfordActivity : AppCompatActivity() {
                                         }
                                     }
                                 }
+                                //Toast.makeText(this@OxfordActivity, "Word not found. Please try a different spelling or inflection", Toast.LENGTH_LONG).show()
                             }
                         }
                     )
@@ -371,19 +296,28 @@ class OxfordActivity : AppCompatActivity() {
                     //textViewDef?.append(oxfordEntries?.value.toString())
                     textViewDef?.append(oxfordEntries?.value?.results?.get(0)?.word ?: potInfQuery)
                     textViewDef?.append(System.getProperty("line.separator"))
-                    textViewDef?.append(oxfordEntries?.value?.results?.get(0)?.language)
+                    textViewDef?.append(oxfordEntries?.value?.results?.get(0)?.language ?: "en-us")
                     textViewDef?.append(System.getProperty("line.separator"))
                     for(i in 0 until (oxfordEntries?.value?.results?.size ?: 0)){
+                        if(i == 0){
+                            for(l in 0 until (oxfordEntries?.value?.results?.get(0)?.lexicalEntries?.get(0)?.entries?.get(0)?.pronunciations?.size ?: 0)){
+                                textViewDef?.append(oxfordEntries?.value?.results?.get(0)?.lexicalEntries?.get(0)?.entries?.get(0)?.pronunciations?.get(l)?.phoneticSpelling)
+                                textViewDef?.append(System.getProperty("line.separator"))
+                            }
+                        }
                         for(j in 0 until (oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.size ?: 0)){
                             for(k in 0 until (oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.size ?: 0)){
                                 for(l in 0 until (oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.senses?.size ?: 0)){
-                                    textViewDef?.append(oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.senses?.get(l)?.shortDefinitions.toString())
+                                    textViewDef?.append("-> " + oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.senses?.get(l)?.shortDefinitions?.get(0).toString())
                                     textViewDef?.append(System.getProperty("line.separator"))
                                 }
+                                /*
                                 for(l in 0 until (oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.pronunciations?.size ?: 0)){
                                     textViewDef?.append(oxfordEntries?.value?.results?.get(i)?.lexicalEntries?.get(j)?.entries?.get(k)?.pronunciations?.get(l)?.phoneticSpelling)
                                     textViewDef?.append(System.getProperty("line.separator"))
                                 }
+
+                                 */
 
                             }
                         }
