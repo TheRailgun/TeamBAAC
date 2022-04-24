@@ -40,14 +40,16 @@ class TranslationActivity : AppCompatActivity(), AdapterView.OnItemSelectedListe
     fun translate(view: View?){
         val query = editTextView!!.text.toString()
         var str = StringBuilder()
-        val translateLiveDataEntries : LiveData<TranslateResponse>? = query.let {
-            TranslateFetcher()
-                .translateText(it, "en-${selectedLanguage}")
-        }
-        translateLiveDataEntries?.observe(this) {
-            for (i in it.text)
-                str.append(i)
-            textView!!.setText("${str.toString()}")
+        if(query != "") {
+            val translateLiveDataEntries: LiveData<TranslateResponse>? = query.let {
+                TranslateFetcher()
+                    .translateText(it, "en-${selectedLanguage}")
+            }
+            translateLiveDataEntries?.observe(this) {
+                for (i in it.text)
+                    str.append(i)
+                textView!!.setText("${str.toString()}")
+            }
         }
 
 
