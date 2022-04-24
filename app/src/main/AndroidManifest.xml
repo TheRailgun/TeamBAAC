@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.QuintrixGroupProject">
         <activity
-            android:name=".ThesaurusActivity"
+            android:name=".OxfordActivity"
             android:exported="false" />
         <activity
             android:name=".TranslationActivity"

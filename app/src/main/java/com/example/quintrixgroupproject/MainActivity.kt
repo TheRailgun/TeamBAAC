@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         val userEditText = findViewById<EditText>(R.id.editTextTranslation)
         val searchButton = findViewById<Button>(R.id.openDictionaryButton)
 
+        /*
         searchButton.setOnClickListener {
             //should have a check if editText is not empty
             val userWord = userEditText.text.toString()
@@ -54,6 +55,8 @@ class MainActivity : AppCompatActivity() {
                 Observer { Log.d(TAG, "Response for MW thesaurus received = $it") }
             )
         }
+
+         */
         
 
         val translateLiveDataEntries : LiveData<TranslateResponse> = TranslateFetcher()
@@ -64,6 +67,14 @@ class MainActivity : AppCompatActivity() {
                 Log.d(TAG, "Response for translate = $it")
             }
         )
+    }
+
+    fun viewDef(view : View) {
+        val intent = Intent(this@MainActivity, OxfordActivity::class.java)
+        //should maybe check that it is nonempty
+        val query = findViewById<EditText>(R.id.editTextTranslation).text.toString()
+        intent.putExtra("query", query)
+        startActivity(intent)
     }
 
     fun viewTranslation(view: View) {
