@@ -35,7 +35,7 @@ class TranslationActivity : AppCompatActivity(), AdapterView.OnItemSelectedListe
             spinner.adapter = adapter
         }
         spinner.onItemSelectedListener = this
-
+        translate(textView)
     }
 
     fun translate(view: View?){
