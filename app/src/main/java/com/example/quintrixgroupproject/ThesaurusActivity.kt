@@ -1,6 +1,7 @@
 package com.example.quintrixgroupproject
 
 import android.content.ContentValues
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -13,7 +14,7 @@ import androidx.lifecycle.Observer
 import com.example.quintrixgroupproject.mwapi.MWFetcher
 import com.example.quintrixgroupproject.mwapi.ThesaurusResponse2Item
 
-class ThesaurusActivity: AppCompatActivity() {
+class ThesaurusActivity : AppCompatActivity() {
     var textView: TextView? = null
     var textViewAnt: TextView? = null
     var editTextView: EditText? = null
@@ -30,53 +31,96 @@ class ThesaurusActivity: AppCompatActivity() {
         }
 
         editTextView!!.setText("${intent.getStringExtra("query")}")
-        if(editTextView!=null) {
+        if (editTextView != null) {
             var userWord = editTextView!!.text.toString()
             println(userWord)
-            val mwLiveDataThesaurus: LiveData<List<ThesaurusResponse2Item>> =
-                MWFetcher().getThesaurusEntry(userWord)
-            mwLiveDataThesaurus.observe(this)
-            {
-                Log.d(ContentValues.TAG, "Response for MW thesaurus received = $it")
-                Log.d(ContentValues.TAG, "Response for MW thesaurus received = ${it.get(0).meta.syns.joinToString()}")
-                textView!!.text = it.get(0).meta.syns.get(0).joinToString("\n")
-                if(!it.get(0).meta.ants.isEmpty()) {
-                    textViewAnt!!.text = it.get(0).meta.ants.get(0).joinToString("\n")
-                } else{
-                    textViewAnt!!.text = ""
-                }
-            }
+            try {
+                val mwLiveDataThesaurus: LiveData<List<ThesaurusResponse2Item>> =
+                    MWFetcher().getThesaurusEntry(userWord)
 
+                mwLiveDataThesaurus.observe(this)
+                {
+                    Log.d(ContentValues.TAG, "Response for MW thesaurus received = $it")
+                    if (it.isEmpty() || it == null) {
+                        textView!!.text = "Not a recognized word"
+                    } else {
+                        Log.d(
+                            ContentValues.TAG,
+                            "Response for MW thesaurus received = ${it.get(0).meta.syns.joinToString()}"
+                        )
+                        textView!!.text = it.get(0).meta.syns.get(0).joinToString(", ")
+                        if (!it.get(0).meta.ants.isEmpty()) {
+                            textViewAnt!!.text = it.get(0).meta.ants.get(0).joinToString(", ")
+                        } else {
+                            textViewAnt!!.text = ""
+                        }
+                    }
+
+                }
+            } catch (e: IllegalStateException) {
+                textView!!.text = "Not a recognized word"
+                Log.i("Thesaurus", "Caught error")
+            }
+        } else {
+            Log.d(ContentValues.TAG, "editTextView is null")
         }
-        else
-        {
-            Log.d(ContentValues.TAG,"editTextView is null")
-        }
+
     }
-    fun getSyns(){
+
+    fun getSyns() {
         textView = findViewById<View>(R.id.textView) as TextView
         textViewAnt = findViewById<View>(R.id.textView2) as TextView
-        if(editTextView!=null) {
+        if (editTextView != null) {
             var userWord = editTextView!!.text.toString()
             println(userWord)
             val mwLiveDataThesaurus: LiveData<List<ThesaurusResponse2Item>> =
                 MWFetcher().getThesaurusEntry(userWord)
             mwLiveDataThesaurus.observe(this)
             {
-                Log.d(ContentValues.TAG, "Response for MW thesaurus received = ${it.get(0).meta.ants.joinToString()}")
-                Log.d(ContentValues.TAG, "Response for MW thesaurus received = ${it.get(0).meta.syns.joinToString()}")
-                textView!!.text = it.get(0).meta.syns.get(0).joinToString("\n")
-                if(!it.get(0).meta.ants.isEmpty()) {
-                    textViewAnt!!.text = it.get(0).meta.ants.get(0).joinToString("\n")
-                } else{
-                    textViewAnt!!.text = ""
+                if (it.isEmpty()) {
+                    textView!!.text = "Not a recognized word"
+                } else {
+                    Log.d(
+                        ContentValues.TAG,
+                        "Response for MW thesaurus received = ${it.get(0).meta.ants.joinToString()}"
+                    )
+                    Log.d(
+                        ContentValues.TAG,
+                        "Response for MW thesaurus received = ${it.get(0).meta.syns.joinToString()}"
+                    )
+                    textView!!.text = it.get(0).meta.syns.get(0).joinToString(", ")
+                    if (!it.get(0).meta.ants.isEmpty()) {
+                        textViewAnt!!.text = it.get(0).meta.ants.get(0).joinToString(", ")
+                    } else {
+                        textViewAnt!!.text = ""
+                    }
                 }
             }
 
+        } else {
+            Log.d(ContentValues.TAG, "editTextView is null")
         }
-        else
-        {
-            Log.d(ContentValues.TAG,"editTextView is null")
-        }
+    }
+    fun viewHome(view: View) {
+        val intent = Intent(this@ThesaurusActivity, MainActivity::class.java)
+        val query = findViewById<EditText>(R.id.editTextThesaurus).text.toString()
+        intent.putExtra("query", query)
+        startActivity(intent)
+        finish()
+    }
+
+    fun viewDef(view: View) {
+        val intent = Intent(this@ThesaurusActivity, OxfordActivity::class.java)
+        val query = findViewById<EditText>(R.id.editTextThesaurus).text.toString()
+        intent.putExtra("query", query)
+        startActivity(intent)
+        finish()
+    }
+    fun viewTranslation(view: View) {
+        val intent = Intent(this@ThesaurusActivity, TranslationActivity::class.java)
+        val query = findViewById<EditText>(R.id.editTextThesaurus).text.toString()
+        intent.putExtra("query", query)
+        startActivity(intent)
+        finish()
     }
 }

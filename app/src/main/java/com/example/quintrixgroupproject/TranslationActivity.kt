@@ -1,5 +1,6 @@
 package com.example.quintrixgroupproject
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -76,13 +77,42 @@ class TranslationActivity : AppCompatActivity(), AdapterView.OnItemSelectedListe
 
     fun languageSelection(lang : String):String {
         var result = when(lang) {
-            "English" -> "en"
+            "French" -> "fr"
             "German" -> "de"
             "Spanish" -> "es"
+            "Chinese" -> "zh"
+            "Polish" -> "pl"
+            "Hindi" -> "hi"
+            "Greek" -> "el"
+            "Korean" -> "ko"
             "Japanese" -> "ja"
             "Arabic" -> "ar"
             else-> ""
         }
         return result
+    }
+
+    fun viewHome(view: View) {
+        val intent = Intent(this@TranslationActivity, MainActivity::class.java)
+        val query = findViewById<EditText>(R.id.editTextTranslation).text.toString()
+        intent.putExtra("query", query)
+        startActivity(intent)
+        finish()
+    }
+
+    fun viewDef(view: View) {
+        val intent = Intent(this@TranslationActivity, OxfordActivity::class.java)
+        val query = findViewById<EditText>(R.id.editTextTranslation).text.toString()
+        intent.putExtra("query", query)
+        startActivity(intent)
+        finish()
+    }
+    fun viewThesaurus(view: View) {
+        val intent = Intent(this@TranslationActivity, ThesaurusActivity::class.java)
+        val txt : TextView = findViewById(R.id.editTextTranslation)
+        val query = txt.text.toString()
+        intent.putExtra("query", query)
+        startActivity(intent)
+        finish()
     }
 }

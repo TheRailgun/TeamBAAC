@@ -9,9 +9,14 @@
     <string name="antonyms">Antonyms</string>
     <string name="synonyms">Synonyms</string>
     <string-array name="languages_array">
-        <item>English</item>
+        <item>French</item>
         <item>German</item>
         <item>Spanish</item>
+        <item>Chinese</item>
+        <item>Polish</item>
+        <item>Hindi</item>
+        <item>Greek</item>
+        <item>Korean</item>
         <item>Japanese</item>
         <item>Arabic</item>
     </string-array>

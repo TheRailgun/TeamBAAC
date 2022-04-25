@@ -4,7 +4,7 @@
     <!-- Entry Items -->
     <dimen name="entry_side_margin">12dp</dimen>
     <dimen name="entry_bottom_margin">20dp</dimen>
-    <dimen name="thesaurus_width">120dp</dimen>
+    <dimen name="thesaurus_width">140dp</dimen>
 
     <!-- Margin at top of definitions list -->
     <dimen name="header_margin">24dp</dimen>

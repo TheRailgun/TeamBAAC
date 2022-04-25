@@ -21,11 +21,15 @@ import com.example.quintrixgroupproject.translation.TranslateFetcher
 import com.example.quintrixgroupproject.translation.TranslateResponse
 
 class MainActivity : AppCompatActivity() {
+    var editTextView : EditText? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val userEditText = findViewById<EditText>(R.id.editTextTranslation)
         val searchButton = findViewById<Button>(R.id.openDictionaryButton)
+        editTextView = findViewById(R.id.editTextTranslation) as EditText
+        editTextView!!.setText("${intent?.getStringExtra("query") ?: "" }")
 
         /*
         searchButton.setOnClickListener {

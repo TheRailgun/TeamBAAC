@@ -66,25 +66,28 @@
         android:id="@+id/thesaurus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginBottom="36dp"
-        android:backgroundTint="@color/black"
+        android:onClick="viewThesaurus"
         android:text="@string/thesaurus_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
+        android:id="@+id/home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="viewHome"
+        android:text="Home"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/definition"
+        app:layout_constraintStart_toEndOf="@+id/thesaurus" />
+
+    <Button
         android:id="@+id/definition"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginEnd="36dp"
-        android:layout_marginBottom="36dp"
-        android:backgroundTint="@color/black"
+        android:onClick="viewDef"
         android:text="Definition"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-         />
-
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

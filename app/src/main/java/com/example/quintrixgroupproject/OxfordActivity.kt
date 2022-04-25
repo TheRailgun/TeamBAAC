@@ -1,5 +1,6 @@
 package com.example.quintrixgroupproject
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -362,5 +363,27 @@ class OxfordActivity : AppCompatActivity() {
                 //Log.d("onCreate OxfordActivity", "textview in observe after if = ${textViewDef?.text}")
             }
         )
+    }
+    fun viewHome(view: View) {
+        val intent = Intent(this@OxfordActivity, MainActivity::class.java)
+        val query = findViewById<EditText>(R.id.editTextDef).text.toString()
+        intent.putExtra("query", query)
+        startActivity(intent)
+        finish()
+    }
+
+    fun viewThesaurus(view: View) {
+        val intent = Intent(this@OxfordActivity, ThesaurusActivity::class.java)
+        val query = findViewById<EditText>(R.id.editTextDef).text.toString()
+        intent.putExtra("query", query)
+        startActivity(intent)
+        finish()
+    }
+    fun viewTranslation(view: View) {
+        val intent = Intent(this@OxfordActivity, TranslationActivity::class.java)
+        val query = findViewById<EditText>(R.id.editTextDef).text.toString()
+        intent.putExtra("query", query)
+        startActivity(intent)
+        finish()
     }
 }
